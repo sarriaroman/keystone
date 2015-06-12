@@ -22,7 +22,8 @@ function datetime(list, path, options) {
 	this._properties = ['formatString'];
 	
 	this.typeDescription = 'date and time';
-	this.formatString = (options.format === false) ? false : (options.format || 'Do MMM YYYY');
+	this.parseFormatString = options.parseFormat || parseFormats;
+	this.formatString = (options.format === false) ? false : (options.format || 'YYYY-MM-DD h:m:s a');
 	
 	if (this.formatString && 'string' !== typeof this.formatString) {
 		throw new Error('FieldType.DateTime: options.format must be a string.');

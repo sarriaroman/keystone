@@ -5,14 +5,8 @@
 var _ = require('underscore'),
 	marked = require('marked'),
 	Path = require('../../lib/path'),
-	fspath = require('path'),
-	jade = require('jade'),
-	fs = require('fs'),
-	keystone = require('../../'),
 	utils = require('keystone-utils'),
-	di = require('asyncdi'),
-	compiledTemplates = {};
-
+	di = require('asyncdi');
 
 /**
  * Field Constructor
@@ -60,9 +54,11 @@ function Field(list, path, options) {
 
 	// Convert notes from markdown to html
 	var note = null;
-	Object.defineProperty(this, 'note', { get: function() {
-		return (note === null) ? (note = (this.options.note) ? marked(this.options.note) : '') : note;
-	} });
+	Object.defineProperty(this, 'note', { 
+		get: function() {
+			return (note === null) ? (note = (this.options.note) ? marked(this.options.note) : '') : note;
+		}
+	});
 
 }
 
