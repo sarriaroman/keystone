@@ -36,7 +36,9 @@ var Keystone = function() {
 		'auto update': false,
 		'model prefix': null,
 		'module root': moduleRoot,
-		'frame guard': 'sameorigin'
+		'frame guard': 'sameorigin',
+		'powered_by name': 'KeystoneJS',
+		'powered_by url' : 'http://keystonejs.com'
 	};
 	this._redirects = {};
 
