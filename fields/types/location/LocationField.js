@@ -90,7 +90,7 @@ module.exports = Field.create({
 		return <div className="field-value">{this.formatValue() || '(no value)'}</div>;
 	},
 	
-	renderField: function(path, label, collapse) {
+	renderField: function(path, label, collapse) {//eslint-disable-line no-unused-vars
 		
 		if (this.state.collapsedFields[path]) {
 			return null;
@@ -136,14 +136,14 @@ module.exports = Field.create({
 		return (
 			<div className="row">
 				<div className="col-sm-2 location-field-label">
-					<label className="text-muted">Lng / Lat</label>
+					<label className="text-muted">Lat / Lng</label>
 				</div>
 				<div className="col-sm-10 col-md-7 col-lg-6 location-field-controls"><div className="form-row">
 					<div className="col-xs-6">
-						<input type="text" name={this.props.paths.geo} ref="geo0" value={this.props.value.geo ? this.props.value.geo[0] : ''} onChange={this.geoChanged.bind(this, 0)} placeholder="Longitude" className="form-control" />
+						<input type="text" name={this.props.paths.geo + '[1]'} ref="geo1" value={this.props.value.geo ? this.props.value.geo[1] : ''} onChange={this.geoChanged.bind(this, 1)} placeholder="Latitude" className="form-control" />
 					</div>
 					<div className="col-xs-6">
-						<input type="text" name={this.props.paths.geo} ref="geo1" value={this.props.value.geo ? this.props.value.geo[1] : ''} onChange={this.geoChanged.bind(this, 1)} placeholder="Latitude" className="form-control" />
+						<input type="text" name={this.props.paths.geo + '[0]'} ref="geo0" value={this.props.value.geo ? this.props.value.geo[0] : ''} onChange={this.geoChanged.bind(this, 0)} placeholder="Longitude" className="form-control" />
 					</div>
 				</div></div>
 			</div>
@@ -181,34 +181,40 @@ module.exports = Field.create({
 	renderUI: function() {
 		
 		if (!this.shouldRenderField()) {
-			return <div className="field field-type-location">
-				<label className="field-label">{this.props.label}</label>
-				<div className="field-ui noedit">
-					{this.renderValue()}
+			return (
+				<div className="field field-type-location">
+					<label className="field-label">{this.props.label}</label>
+					<div className="field-ui noedit">
+						{this.renderValue()}
+					</div>
 				</div>
-			</div>;
+			);
 		}
 		
+		/* eslint-disable no-script-url */
 		var showMore = !_.isEmpty(this.state.collapsedFields)
 			? <a href="javascript:;" className="field-label-companion" onClick={this.uncollapseFields}>(show more fields)</a>
 			: null;
+		/* eslint-enable */
 		
-		return <div className="field field-type-location">
-			<div className="field-ui">
-				<label>{this.props.label}</label>
-				{showMore}
-				{this.renderField('number', 'PO Box / Shop', true)}
-				{this.renderField('name', 'Building Name', true)}
-				{this.renderField('street1', 'Street Address')}
-				{this.renderField('street2', 'Street Address 2', true)}
-				{this.renderField('suburb', 'Suburb')}
-				{this.renderStateAndPostcode()}
-				{this.renderField('country', 'Country')}
-				{this.renderGeo()}
-				{this.renderGoogleOptions()}
-				<Note note={this.props.note} />
+		return ( 
+			<div className="field field-type-location">
+				<div className="field-ui">
+					<label>{this.props.label}</label>
+					{showMore}
+					{this.renderField('number', 'PO Box / Shop', true)}
+					{this.renderField('name', 'Building Name', true)}
+					{this.renderField('street1', 'Street Address')}
+					{this.renderField('street2', 'Street Address 2', true)}
+					{this.renderField('suburb', 'Suburb')}
+					{this.renderStateAndPostcode()}
+					{this.renderField('country', 'Country')}
+					{this.renderGeo()}
+					{this.renderGoogleOptions()}
+					<Note note={this.props.note} />
+				</div>
 			</div>
-		</div>;
+		);
 		
 	}
 	

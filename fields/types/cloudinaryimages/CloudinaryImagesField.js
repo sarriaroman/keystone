@@ -1,9 +1,8 @@
 var _ = require('underscore'),
-	$ = require('jquery'),
 	React = require('react'),
 	Field = require('../Field');
 
-var SUPPORTED_TYPES = ['image/gif', 'image/png', 'image/jpeg', 'image/bmp', 'image/x-icon', 'application/pdf', 'image/x-tiff', 'image/x-tiff', 'application/postscript', 'image/vnd.adobe.photoshop'];
+var SUPPORTED_TYPES = ['image/gif', 'image/png', 'image/jpeg', 'image/bmp', 'image/x-icon', 'application/pdf', 'image/x-tiff', 'image/x-tiff', 'application/postscript', 'image/vnd.adobe.photoshop', 'image/svg+xml'];
 
 var Thumbnail = React.createClass({
 	
@@ -40,7 +39,7 @@ var Thumbnail = React.createClass({
 			<div className='image-field image-sortable row col-sm-3 col-md-12' title={title}> 
 				<div className={previewClassName}> 
 					<a href={this.props.url} className='img-thumbnail'>
-						<img style={ { height: '90'} } className='img-load' src={this.props.url} />
+						<img style={{ height: '90' }} className='img-load' src={this.props.url} />
 						<span className={iconClassName} />
 					</a>
 				</div>
@@ -119,7 +118,7 @@ module.exports = Field.create({
 		var files = event.target.files;
 		_.each(files, function (f) {
 			if (!_.contains(SUPPORTED_TYPES, f.type)) {
-				alert('Unsupported file type. Supported formats are: GIF, PNG, JPG, BMP, ICO, PDF, TIFF, EPS, PSD');
+				alert('Unsupported file type. Supported formats are: GIF, PNG, JPG, BMP, ICO, PDF, TIFF, EPS, PSD, SVG');
 				return;
 			}
 
@@ -147,7 +146,6 @@ module.exports = Field.create({
 
 	renderToolbar: function() {
 		var body = [];
-		var self = this;
 
 		var push = function (queueType, alertType, count, action) {
 			if (count <= 0) return;
@@ -196,9 +194,11 @@ module.exports = Field.create({
 	},
 
 	renderContainer: function() {
-		return <div className='images-container clearfix'>
-			{this.state.thumbnails}
-		</div>;
+		return (
+			<div className='images-container clearfix'>
+				{this.state.thumbnails}
+			</div>
+		);
 	},
 
 	renderFieldAction: function() {
