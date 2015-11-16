@@ -9,23 +9,22 @@ html
 		link(rel="stylesheet", href="/keystone/styles/auth.min.css")
 		link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
 		block css
-			
+
 	body: .auth-wrapper
-		
+
 		+flash-messages(messages)
 		if !messages
 			.alert.alert-placeholder &nbsp;
 		.auth-body(class=messages && messages.error.length ? 'has-errors' : null)
 			block content
-		
+
 		block footer
 			.auth-footer
-				| Powered by 
-				a(href='http://keystonejs.com', target='_blank', title='The Node.js CMS and web application platform (new window)') KeystoneJS
-		
+				| Powered by <a href="#{powered_by_url}" target="_blank">#{powered_by_name}</a>
+
 		//- Page Scripts
 		block js
-		
+
 		//- Google Analytics
 		if env == 'production' && ga.property && ga.domain
 			script.

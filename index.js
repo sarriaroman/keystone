@@ -38,6 +38,7 @@ var Keystone = function() {
 		'module root': moduleRoot,
 		'frame guard': 'sameorigin',
 		'powered_by name': 'KeystoneJS',
+		'powered_by logo': '/keystone/images/logo.png',
 		'powered_by url' : 'http://keystonejs.com'
 	};
 	this._redirects = {};
